@@ -34,7 +34,7 @@ public class OperEx {
 
 		a = 7;
 		System.out.println("a:" + a);
-		System.out.println("후위 증감연산:" + (a++));
+		System.out.println("후위 증d감연산:" + (a++));
 		System.out.println("최종 da:" + a);
 
 		//	나눗셈 보충
