@@ -3,10 +3,54 @@ package com.javaex.basics;
 public class OperEx {
 
 	public static void main(String[] args) {
-		arithOperEx();
 //		arithOperEx();
 //		logicOper();
 		bitOper();
+//		bitOper();
+//		bitShift();
+		conditionalOper();
+	}
+
+	//	3항 연산자 : 조건부 연산
+	private static void conditionalOper() {
+		int a = 10;
+
+		//	a가 짝수(2의 배수)면 짝수, 아니면 홀수
+		String message;
+		//	조건식 ? 참일 때의 값: 거짓일 때의 값
+		message = a % 2 == 0 ? "짝수": "홀수";
+
+		System.out.println(a + "는 " + message);
+
+		int score = 40;
+
+		//	80점 이상이면 Good
+		//		80 ~ 50 이면 Pass
+		//		그 이하면 Fail
+		message = score >= 80 ? "Good":
+							score >= 50 ? "Pass" : "Fail";
+		System.out.println("점수:" + score + ", 결과:" + message);
+
+	}
+
+	//	비트 시프트 연산자
+	//	비트 단위 이동
+	private static void bitShift() {
+		int data = 1;
+
+		System.out.println(data);
+		System.out.println("1비트 왼쪽 시프트:" + 
+				Integer.toBinaryString(data << 1));	
+		System.out.println("4비트 왼쪽 시프트:" +
+				Integer.toBinaryString(data << 4));
+
+		data = 0b1000;
+		System.out.println("원본:" +
+				Integer.toBinaryString(data));
+		System.out.println("1비트 우측 시프트:" +
+				Integer.toBinaryString(data >> 1));
+		System.out.println("3비트 우측 시프트:" +
+				Integer.toBinaryString(data >> 3));
 	}
 
 	//	비트 연산자
@@ -15,7 +59,7 @@ public class OperEx {
 	private static void bitOper() {
 		byte b1 = 0b1101;
 		byte b2 = 0b0111;
-
+		
 		System.out.println("b1:" + Integer.toBinaryString(b1));
 		System.out.println("b2:" + Integer.toBinaryString(b2));
 		int result = b1 & b2;	//	비트 논리 곱: 둘다 1이어야 1비트로 세팅
@@ -25,21 +69,21 @@ public class OperEx {
 		result = ~b1;	//	비트 논리 부정 : 1 <-> 0
 		System.out.println("~b1:" + Integer.toBinaryString(result));
 	}
-
+	
 	//	비교연산, 논리연산
 	//	결과로 boolean 반환, 논리값으로 프로그램의 흐름제어 -> 중요
 	private static void logicOper() {
 		//	비교 연산자 >, >=, <, <=, ==(같다), !=(같지 않다)
 		int n1 = 7;
 		int n2 = 3;
-
+		
 		System.out.println("a가 b와 같은가? " + (n1 == n2));
 		System.out.println("a가 b와 같지 않은가? " + (n1 != n2));
-
+		
 		//	논리 연산 : AND(논리곱: &&), OR(논리합: ||), NOT(논리부정: !)
 		//	-> 집합을 떠올리자
 		int n3 = 5;
-
+		
 		//	n3는 0초과, 10미만의 값인가?
 		//		조건 1: n3 > 0
 		//		조건 2: n3 < 10
@@ -48,7 +92,7 @@ public class OperEx {
 		boolean r2 = n3 < 10;	//	조건 2
 		boolean r1andr2 = r1 && r2;	//	n3 > 0 && n3 < 10
 		System.out.println("n3가 0 초과 10 미만 영역에 있는가? " + r1andr2);
-
+		
 		//	n3는 0이하이거나 10이상의 값인가?
 		//		조건 1: n3 <= 0
 		//		조건 2: n3 >= 10
@@ -57,13 +101,13 @@ public class OperEx {
 		r2 = n3 >= 10;	//	조건 2
 		boolean r1orr2 = r1 || r2;	//	n3 <= 0 || n3 >= 10
 		System.out.println("n3가 0이하이거나 n3가 10이상의 영역? " + r1orr2);
-
+		
 		//	not 논리 부정 -> true <-> false 반전
 		boolean rNot = !(n3 > 0 && n3 < 10);	//	여집합 영역
 		//	-> n3 <= 0 || n3 >= 0
 		System.out.println("논리부정:" + rNot);
 	}
-
+	
 	//	산술 연산자
 	private static void arithOperEx() {
 		int a = 7;
