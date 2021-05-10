@@ -8,7 +8,19 @@ public class ArrayClassEx {
 	public static void main(String[] args) {
 //		printArrayEx();
 //		copyArrayEx();
-		sortEx();
+//		sortEx();
+		sortCustomEx();
+	}
+	//  정렬 ( 사용자 정의 클래스) 
+	private static void sortCustomEx() {
+		Member[] members = {
+				new Member("홍길동"),
+				new Member("고길동"),
+				new Member("장길산")
+		};
+		System.out.println("원본배열: " + Arrays.toString(members));
+		Arrays.sort(members);
+		System.out.println("정렬 : " + Arrays.toString(members));
 	}
 	
 	//	정렬
@@ -21,12 +33,13 @@ public class ArrayClassEx {
 		Arrays.sort(nums);
 		System.out.println("정렬 후(오름차순):" + Arrays.toString(nums));
 		
-//		nums = new int[] { 5, 6, 3, 2, 4, 1, 7, 9, 8, 10 }; 
-//		System.out.println("원본:" + Arrays.toString(nums));
-//		
-//		//	정렬 내림차순
-//		Arrays.sort(nums, Collections.reverseOrder());
+		Integer num2[] = { 5,6,3,2,4,1,7,9,8,10};
+		System.out.println("원본 :" + Arrays.toString(num2));
 		
+		// 정렬 ( 내림차순)
+		
+		Arrays.sort(num2, Collections.reverseOrder());
+		System.out.println();
 	}
 	
 	//	배열 내 검색
