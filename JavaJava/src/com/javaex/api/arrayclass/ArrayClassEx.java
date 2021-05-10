@@ -21,6 +21,8 @@ public class ArrayClassEx {
 		System.out.println("원본배열: " + Arrays.toString(members));
 		Arrays.sort(members);
 		System.out.println("정렬 : " + Arrays.toString(members));
+		Arrays.sort(members, Collections.reverseOrder()); // 내림차순 정렬
+		System.out.println("정렬 (내림차순)"+ Arrays.toString(members));
 	}
 	
 	//	정렬
