@@ -19,7 +19,7 @@ public class StringEx {
 		//	문자열 삽입: insert
 		sb.insert(8, "my");
 		//	문자열 치환: replace
-		sb.replace(8, 10, "your ");
+		sb.replace(8, 10, "yoour ");
 
 		System.out.println(sb);
 
