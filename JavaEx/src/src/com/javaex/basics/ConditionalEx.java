@@ -1,4 +1,4 @@
-package com.javaex.basics;
+package src.com.javaex.basics;
 
 import java.util.Scanner;
 
