@@ -2,6 +2,7 @@ package com.javaex.jdbc.oracle.dao;
 
 import java.sql.Connection;
 import java.sql.DriverManager;
+import java.sql.PreparedStatement;
 import java.sql.ResultSet;
 import java.sql.SQLException;
 import java.sql.Statement;
@@ -22,10 +23,10 @@ public class AuthorDAOImpl implements AuthorDAO {
 		} catch (ClassNotFoundException e) {
 			System.err.println("드라이버 로드 실패!");
 		}
-
+		
 		return conn;
 	}
-
+	
 	@Override
 	public List<AuthorVO> getList() {
 		Connection conn = null;
@@ -34,23 +35,23 @@ public class AuthorDAOImpl implements AuthorDAO {
 		ResultSet rs = null;
 		//	결과 객체
 		List<AuthorVO> list = new ArrayList<>();
-
+		
 		try {
 			conn = getConnection();
 			stmt = conn.createStatement();
-
+			
 			//	쿼리
 			String sql = "SELECT author_id, author_name, author_desc " +
 						"FROM author";
 			//	쿼리 실행
 			rs = stmt.executeQuery(sql);
-
+			
 			//	ResultSet -> Java 객체로 변환
 			while(rs.next()) {	//	다음 레코드가 있으면 반환
 				Long id = rs.getLong(1);
 				String authorName = rs.getString(2);
 				String authorDesc = rs.getString(3);
-
+				
 				//	DTO 객체
 				AuthorVO vo = new AuthorVO(id, authorName, authorDesc);
 				//	DTO 객체 -> List에 추가
@@ -64,7 +65,7 @@ public class AuthorDAOImpl implements AuthorDAO {
 				stmt.close();
 				conn.close();
 			} catch (Exception e) {
-
+				
 			}
 		}
 		return list;
@@ -84,8 +85,34 @@ public class AuthorDAOImpl implements AuthorDAO {
 
 	@Override
 	public boolean insert(AuthorVO vo) {
-		// TODO Auto-generated method stub
-		return false;
+		// .executeUpdate 메서드 -> int (삽입된 레코드 수)
+		Connection conn = null;
+		PreparedStatement pstmt = null;
+		int insertedCount = 0;
+		
+		try {
+			conn = getConnection();
+			//	실행 계획
+			String sql = "INSERT INTO author VALUES(seq_author_id, ?, ?)";
+			pstmt = conn.prepareStatement(sql);
+			//	파리미터 바인딩
+			pstmt.setString(1, vo.getAuthorName());
+			pstmt.setString(2, vo.getAuthorDesc());
+			
+			//	쿼리 수행
+			insertedCount = pstmt.executeUpdate();
+		} catch (SQLException e) {
+			e.printStackTrace();
+		} finally {
+			try {
+				pstmt.close();
+				conn.close();
+			} catch (Exception e) {
+				
+			}
+		}
+		
+		return 1 == insertedCount;	//	삽입된 레코드가 1개면 성공
 	}
 
 	@Override
